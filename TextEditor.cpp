@@ -12,6 +12,11 @@ namespace TextEditor
 		m_cursor.currNode = m_lines->lineHead;
 	}
 
+	CvTextEditor::~CvTextEditor()
+	{
+		cout << "Quitting The Application" << endl;
+	}
+
 	CvTextEditor::charNode* CvTextEditor::GetCharNode(char character)
 	{
 		charNode* newCharNode = new charNode;
@@ -228,7 +233,7 @@ namespace TextEditor
 		cout << endl;
 	}
 
-	void CvTextEditor::PrintEntireText()
+	void CvTextEditor::PrintText()
 	{
 		lineNode* lineItr = m_lines;
 
@@ -246,7 +251,34 @@ namespace TextEditor
 		}
 	}
 	
-	
+	void CvTextEditor::PrintTextInReverse()
+	{
+		lineNode* lineItr = m_lines;
+
+		while (lineItr->nextLine != NULL)
+		{
+			lineItr = lineItr->nextLine;
+		}
+
+		while (lineItr != NULL)
+		{
+			charNode* nodeItr = lineItr->lineHead;
+			while (nodeItr->next != NULL)
+				nodeItr = nodeItr->next;
+
+			nodeItr = nodeItr->prev;
+
+			while (nodeItr != NULL)
+			{
+				cout << nodeItr->character;
+				nodeItr = nodeItr->prev;
+			}
+
+			cout << endl;
+
+			lineItr = lineItr->prevLine;
+		}
+	}
 	
 }
 

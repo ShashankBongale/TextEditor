@@ -5,36 +5,78 @@ using namespace std;
 
 int main()
 {
-	TextEditor::CvTextEditor textEditorObj;
+	TextEditor::CvTextEditor* textEditor = new TextEditor::CvTextEditor();
 
-	TextEditor::CvTextEditor *textEditorObj1 = new TextEditor::CvTextEditor();
+	int numberOfInput;
+	cin >> numberOfInput;
+	cout << numberOfInput << endl;
 
-	/*textEditorObj.InsertCharacterBeforeCursor('a');
-	textEditorObj.InsertCharacterBeforeCursor('b');
-	textEditorObj.InsertCharacterBeforeCursor('c');
-	textEditorObj.InsertCharacterBeforeCursor('d');
-		
-	textEditorObj.MoveCursorToBeginningOfTheLine();
-	textEditorObj.EnterLine();
+	for (int inputItr = 0; inputItr < numberOfInput; ++inputItr)
+	{
+		char input;
+		cin >> input;
 
-	textEditorObj.MoveCursorUp();
-	textEditorObj.MoverCursorToEndOfTheLine();
+		switch (input)
+		{
+		case OP_INSERT_CHAR:
+			cin >> input;
+			textEditor->InsertCharacterBeforeCursor(input);
+			break;
 
-	textEditorObj.InsertCharacterBeforeCursor('e');
+		case OP_PRESSED_ENTER:
+			textEditor->EnterLine();
+			break;
 
-	textEditorObj.DeleteCharacterAtCursor();
+		case OP_PRESSED_DELETE:
+			textEditor->DeleteCharacterAtCursor();
+			break;
 
-	textEditorObj.PrintEntireText();*/
+		case OP_PRESSED_LEFT:
+			textEditor->MoveCursorLeft();
+			break;
 
-	textEditorObj.EnterLine();
-	textEditorObj.InsertCharacterBeforeCursor('b');
-	textEditorObj.MoveCursorUp();
-	textEditorObj.DeleteCharacterAtCursor();
-	//textEditorObj.InsertCharacterBeforeCursor('a');
-	textEditorObj.PrintEntireText();
-	//textEditorObj.PrintCurrentLine();
-	
-	cout << "Application End" << endl;
+		case OP_PRESSED_RIGHT:
+			textEditor->MoveCursorRight();
+			break;
 
+		case OP_PRESSED_UP:
+			textEditor->MoveCursorUp();
+			break;
+
+		case OP_PRESSED_DOWN:
+			textEditor->MoveCursorDown();
+			break;
+
+		case OP_PRESSED_HOME:
+			textEditor->MoveCursorToBeginningOfTheLine();
+			break;
+
+		case OP_PRESSED_END:
+			textEditor->MoverCursorToEndOfTheLine();
+			break;
+
+		case OP_PRINT_TEXT:
+			textEditor->PrintText();
+			break;
+
+		case OP_PRINT_LINE:
+			textEditor->PrintCurrentLine();
+			break;
+
+		case OP_PRINT_REVERSE_PRINT:
+			textEditor->PrintTextInReverse();
+			break;
+
+		case OP_QUIT:
+			delete textEditor;
+			return 0;
+
+		default: 
+			cout << "Incorrect option: " << input << endl;
+		}
+	}
+
+	delete textEditor;
 	return 0;
+
 }
