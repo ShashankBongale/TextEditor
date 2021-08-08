@@ -9,7 +9,6 @@ int main()
 
 	int numberOfInput;
 	cin >> numberOfInput;
-	cout << numberOfInput << endl;
 
 	for (int inputItr = 0; inputItr < numberOfInput; ++inputItr)
 	{
@@ -80,3 +79,4 @@ int main()
 	return 0;
 
 }
+
