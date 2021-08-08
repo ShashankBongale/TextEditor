@@ -98,6 +98,8 @@ namespace TextEditor
 				if (nextLine->nextLine != NULL)
 					nextLine->nextLine->prevLine = currLine;
 
+				nextLine->lineHead->prev = currNode->prev;
+
 				if(currNode->prev != NULL)
 					currNode->prev->next = nextLine->lineHead;
 				else
@@ -105,8 +107,8 @@ namespace TextEditor
 					currLine->lineHead = nextLine->lineHead;
 				}
 
-				//m_cursor.currNode = currLine->
-
+				m_cursor.currNode = currNode->prev;
+				m_cursor.currLine = currLine;
 
 				delete currNode;
 				delete nextLine;
@@ -114,6 +116,24 @@ namespace TextEditor
 		}
 		else
 		{
+			charNode* currNode = m_cursor.currNode;
+			
+			if (currNode->prev != NULL)
+			{
+				currNode->prev->next = currNode->next;
+				m_cursor.currNode = currNode->prev;
+			}
+			else
+			{
+				m_cursor.currLine->lineHead = currNode->next;
+				m_cursor.currNode = currNode->next;
+			}
+
+			currNode->next->prev = currNode->prev;
+
+			m_cursor.currNode = currNode->prev;
+			
+			delete currNode;
 
 		}
 	}
